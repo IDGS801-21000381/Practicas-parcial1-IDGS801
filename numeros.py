@@ -1,3 +1,4 @@
+
 class Numeros:
     def __init__(self):
         self.numeros = []
@@ -50,6 +51,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
-    
-

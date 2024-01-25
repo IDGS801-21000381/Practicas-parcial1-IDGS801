@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<h1>Calculadora basica </h1>
+<form action="/resultado" method="POST">
+    <label>Número 1:</label>
+    <input type="text" name="n1"><br>
+    <label>Número 2:</label>
+    <input type="text" name="n2"><br>
+    
+    <h3>Tipos de operaciones que puedo hacer:</h3>
+    <div>
+
+        <input type="radio" name="operacion" value="suma"> Suma 
+        <input type="radio" name="operacion" value="resta"> Resta 
+        <input type="radio" name="operacion" value="multiplicacion"> Multiplicación 
+        <input type="radio" name="operacion" value="division"> División
+        <div><br><br></div>
+        <input type="submit" class="btn btn-primary">
+
+    </div>
+    
+</form>
+
+{% endblock %}
