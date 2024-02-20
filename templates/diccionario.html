@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{%block container %}
+{% import "_macros2.html" as macros %}
+<h1>Palabras en ingles/ Español para guardar</h1>
+
+<form action="" method="post">
+    {{macros.camposNuevos(form.espanol, class="form-control")}}
+    {{macros.camposNuevos(form.ingles, class="form-control")}}
+    <input type="submit" value="registrar" name="registrar" class="btn btn-primary">
+</form>
+
+<h1>Leer</h1>
+
+<form action="" method="get">
+    {{macros.camposNuevos(search.lectura, class="form-control")}}
+    {{macros.camposNuevos(search.busqueda, class="form-control")}}
+    <input type="submit" value="buscar" name="buscar" class="btn btn-info">
+</form>
+
+<h1>La palabra es {{resultado}}</h1>
+
+{% endblock %}

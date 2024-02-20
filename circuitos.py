@@ -1,63 +1,4 @@
-from wtforms import Form
-from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, FieldList, FormField, SelectField, RadioField, EmailField
-from wtforms import StringField, TelField, IntegerField, validators
-from wtforms import EmailField
-from wtforms import SelectField, RadioField
-
-class UserForm(Form):
-    nombre=StringField('nombre')
-    apaterno=StringField('apaterno')
-    amaterno=StringField('amaterno')
-    email=EmailField('email')
-    edad=IntegerField('edad')
-
-class PuntosForm(FlaskForm):
-    x1 = IntegerField('x1')
-    x2 = IntegerField('x2')
-    y1 = IntegerField('y1')
-    y2 = IntegerField('y2')
-    resultado = IntegerField('resultado')
-
-
-
-class ResistForm(Form):
-
-    banda1 = SelectField("Banda 1", 
-    choices=[(0, "Negro"), (10, "Cafe"),(20, "Rojo"),(30, "Naranja"),(40, "Amarillo"),(50, "Verde"),(60, "Azul"),(70, "Violeta"),(80, "Gris"),(90, "Blanco")])
-
-    banda2 = SelectField("Banda 2", 
-    choices=[(0, "Negro"),(1, "Cafe"),(2, "Rojo"),(3, "Naranja"),(4, "Amarillo"),(5, "Verde"),(6, "Azul"),(7, "Violeta"),(8, "Gris"),(9, "Blanco")])
-
-    banda3 = SelectField("Banda 3", 
-    choices=[(1,"Negro"),(10,"Cafe"),(100,"Rojo"),(1000,"Naranja"),(10000, "Amarillo"),(100000, "Verde"),(1000000, "Azul"),(10000000, "Violeta"),(100000000, "Gris"),(1000000000, "Blanco")])
-
-    rbtnTol = RadioField('Tolerancia', choices=[(0.05, "Oro"), (0.1, "Plata")])
-
-
-class diccionario(Form):
-    espanol=StringField("espanol", validators=[
-        validators.DataRequired(message='El campo es requerido')
-    ])
-    ingles=StringField("ingles", validators=[
-        validators.DataRequired(message='El campo es requerido')
-    ])
-
-class search(Form):
-    lectura = RadioField("Idioma", choices=["ingles", "espanol"])
-    
-    busqueda = StringField("busqueda", validators=[
-        validators.DataRequired(message='El campo es requerido')
-    ])
- 
-
-
-
-
-
-
 class ColoresResistencia():
-
 
     textco = ""
     backg = ""
@@ -176,8 +117,11 @@ class ColoresResistencia():
     
     def tolerancia(self):
         color = ""
+
+        if self.tol == 0.02:
+            color = "Rojo"
             
-        if self.tol == 0.05:
+        elif self.tol == 0.05:
             color = "Oro"
            
         elif self.tol == 0.1:
@@ -320,9 +264,16 @@ class ColoresResistencia():
         return backg
     
     def color4(self):
-        if self.tol == 0.05:
+        
+
+        if self.tol == 0.02:
+            
+            backg = "red"
+        elif self.tol == 0.05:
+            
             backg = "goldenrod"
         elif self.tol == 0.1:
+            
             backg = "silver"
         
         return backg

@@ -1,14 +1,11 @@
 from flask import Flask,render_template,request
+from forms import UserForm, PuntosForm, ColoresResistencia, ResistForm, diccionario
 from flask import Flask, render_template, request, send_from_directory
-from forms import UserForm, PuntosForm
 import os
 import forms
-
 datos = os.urandom(24)
-
 app = Flask(__name__)
-app.secret_key = os.urandom(24)
-
+app.secret_key = 'tu_datos_aqui'
 
 
 @app.route("/OperasBas")
@@ -63,8 +60,45 @@ def puntos():
     return render_template("distanciaPuntos.html", form=puntos_clase, x1=x1, x2=x2, y1=y1, y2=y2)        
 
 
+@app.route("/dic", methods=['GET', 'POST'])
+def definicion():
+    espanol= ''
+    ingles=''
+    palabra=''
+    tradduccion=''
+    opciones=None
+    ingresar=forms.diccionario(request.form)
+    buscar=forms.search(request.form)
+    if request.method == 'POST' and ingresar.validate():
+        if "registrar" in request.form:
+            espanol= ingresar.espanol.data
+            ingles=ingresar.ingles.data
+            archivo1= open('palabras.txt', 'a')
+            palabra ='\n'+ espanol.lower() + '|' + ingles.lower()
+            archivo1.write(palabra)
+            archivo1.close()
+        elif "buscar" in request.form:
+            palabra = buscar.lectura.data
+            opciones = buscar.busqueda.data
 
-if __name__== "__main__":
+            with open('archivo.txt', 'r') as archivo:
+                traducciones={}
+                for linea in archivo:
+                    linea = linea.strip()
+                    partes=linea.split('|')
+                    traducciones[partes[0]] = partes[1]
+                    traducciones[partes[1]] =partes[0]
+            if palabra.lower() in traducciones:
+                tradduccion =traducciones[palabra.lower()]
+            else:
+                tradduccion= "Esto no esta en el diccionario"
+
+    #palabra_espanol=forms.diccionario(request.form)
+    #palabra_ingles=forms.diccionario(request.form)
+    return render_template("diccionario.html", form =ingresar, espanol=espanol, ingles=ingles,
+                           palabra =palabra, opciones=opciones, search=buscar,
+                           respuesta=tradduccion)
+
+if __name__ == "__main__":
     app.run(debug=True)
 
-app.secret_key = 'tu_datos_aqui'

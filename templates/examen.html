@@ -1,0 +1,51 @@
+
+{% extends "layout.html" %}
+{%block container %}
+{% import "_macros2.html" as macros%}
+
+<h1>Selecciona los tres colores de la resistencia</h1>
+<form action="/circuito" method="POST">
+    <td>{{ form.banda1.label }}</td>
+    <dd>{{ form.banda1() | safe }}</dd>  
+    <td>{{ form.banda2.label }}</td>
+    <dd>{{ form.banda2() | safe }}</dd>
+    <td>{{ form.banda3.label }}</td>
+    <dd>{{ form.banda3() | safe }}</dd>
+    <td>{{ form.rbtnTol.label }}</td>
+    <dd>{{ form.rbtnTol() | safe }}</dd>
+
+    <input type="submit" id="btn1" class="btn btn-primary" value="Registrar" name="enviarFormulario">
+</form>
+{% endblock %}
+
+
+<!--
+    <h2>Tabla de Resistencia</h2>
+<div class="table-responsive">
+    <table class="table table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Color 1</th>
+                <th scope="col">Color 2</th>
+                <th scope="col">Color 3</th>
+                <th scope="col">Tolerancia</th>
+                <th scope="col">Valor</th>
+                <th scope="col">Valor Mínimo</th>
+                <th scope="col">Valor Máximo</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ color1 }}</td>
+                <td>{{ color2 }}</td>
+                <td>{{ color3 }}</td>
+                <td>{{ tolerancia }}</td>
+                <td>{{ valor_resistencia }}</td>
+                <td>{{ valor_minimo }}</td>
+                <td>{{ valor_maximo }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+-->
+
